@@ -1,7 +1,7 @@
 # BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+<h3>Name:BHAVYASHREE R  </h3>
+<h3>Register Number:212223110006 </h3>
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -67,6 +67,57 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 <li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
 
 </ol>
+<h3>Program</h3>
+
+```
+from collections import deque, defaultdict
+
+def bfs(graph, start, visited, path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+
+    while queue:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if not visited[neighbour]:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+
+    return path
+
+# Initialize the graph
+graph = defaultdict(list)
+
+# Read number of nodes and edges
+n, e = map(int, input("Enter number of nodes and edges: ").split())
+
+# Read edges (as strings to support letters and numbers)
+for _ in range(e):
+    u, v = input().split()
+    graph[u].append(v)
+    graph[v].append(u)  # undirected graph
+
+# Sort neighbors for consistent traversal (optional)
+for node in graph:
+    graph[node].sort()
+
+# Input starting node
+start = input("Enter starting node: ")
+
+# Initialize visited and path
+visited = defaultdict(bool)
+path = []
+
+# Perform BFS traversal
+traversedpath = bfs(graph, start, visited, path)
+
+# Output the BFS traversal path
+print("BFS Traversal:", traversedpath)
+
+```
 
 <hr>
 <h3>Sample Input</h3>
